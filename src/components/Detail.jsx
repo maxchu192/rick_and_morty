@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Detail() {
     const { id } = useParams
-    console.log(id)
-    const {character, setCharacter} = useState({});
+    const [character, setCharacter] = useState({});
 
     useEffect(() => {
         axios(`https://rickandmortyapi.com/api/character/${id}`)
@@ -26,12 +25,13 @@ export default function Detail() {
         <button>
             <Link to='/home'>Home</Link>
         </button>
-        <h3>{character?.name}</h3>
-        <p>{character?.status}</p>
-        <p>{character?.species}</p>
-        <p>{character?.gender}</p>
-        <p>{character?.origin?.name}</p>
-        <img src={character?.image} alt={character?.name} />
+        <h1>Details</h1>
+        <h2>{character.name}</h2>
+        <h2>{character.status}</h2>
+        <h2>{character.species}</h2>
+        <h2>{character.gender}</h2>
+        <h2>{character.origin?.name}</h2>
+        <img src={character.image} alt={character.name} />
     </div>
   )
 }

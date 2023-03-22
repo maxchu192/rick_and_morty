@@ -5,7 +5,7 @@ export default function Card({id, name, status, species, gender, origin, image, 
    return (
       <div className="card">
          <button onClick={() =>  onClose(id)}>X</button>
-         <Link to={`detail/${id}`} >
+         <Link to={`/detail/${id}`} >
          <h2>{name}</h2>
          </Link>         
          <h2>{status}</h2>

@@ -3,9 +3,11 @@ import axios from 'axios';
 import Cards from './components/Cards.jsx';
 import Nav from './components/Nav.jsx';
 import About from './components/About.jsx';
+import Detail from './components/Detail.jsx';
+import Login from './components/Login.jsx';
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Detail from './components/Detail.jsx';
+
 
 function App() {
    const [characters, setCharacters] = useState([])
@@ -34,9 +36,10 @@ function App() {
       <div className='App'>
          <Nav onSearch={onSearch} />
          <Routes>
-            <Route path='home' element={<Cards characters={characters} onClose={onClose} />} />
-            <Route path='about' element={<About />} />
-            <Route path='details/:id' element={<Detail />} />
+            <Route path='/' element={<Login />} ></Route>
+            <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/details/:id' element={<Detail />} />
          </Routes>
          
       </div>
