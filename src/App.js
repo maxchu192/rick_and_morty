@@ -7,6 +7,7 @@ import Detail from './components/Detail.jsx';
 import Login from './components/Login.jsx';
 import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import Favorites from './components/Favorites';
 
 
 function App() {
@@ -23,6 +24,11 @@ function App() {
          navigate('/home');
       }
    };
+
+   function logout() {
+      setAccess(false);
+      navigate('/');
+   }
 
    useEffect(() => {
       !access && navigate('/');
@@ -51,13 +57,14 @@ function App() {
    return (
       <div className='App'>
          {
-            location.pathname === "/" ? null : (<Nav onSearch={onSearch} />)
+            location.pathname === "/" ? null : (<Nav logout={logout} onSearch={onSearch} />)
          }
          <Routes>
-            <Route path='/' element={<Login login={login}/>} ></Route>
+            <Route path='/' element={<Login login={login}/>} />
             <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
             <Route path='/about' element={<About />} />
-            <Route path='/details/:id' element={<Detail />} />
+            <Route path='/favorites' element={<Favorites onClose={onClose} />} />
+            <Route path='/detail/:id' element={<Detail />} />
          </Routes>
          
       </div>

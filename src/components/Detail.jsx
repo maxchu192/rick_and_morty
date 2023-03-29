@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom'; 
 
 export default function Detail() {
-    const { id } = useParams
+    const { id } = useParams()
     const [character, setCharacter] = useState({});
 
     useEffect(() => {
@@ -22,16 +22,16 @@ export default function Detail() {
 
   return (
     <div>
-        <button>
-            <Link to='/home'>Home</Link>
-        </button>
-        <h1>Details</h1>
-        <h2>{character.name}</h2>
-        <h2>{character.status}</h2>
-        <h2>{character.species}</h2>
-        <h2>{character.gender}</h2>
-        <h2>{character.origin?.name}</h2>
+        <h2>Details</h2>
+        <h3>{character.name}</h3>
+        <h3>{character.status}</h3>
+        <h3>{character.species}</h3>
+        <h3>{character.gender}</h3>
+        <h3>{character.origin?.name}</h3>
         <img src={character.image} alt={character.name} />
+        <Link to='/home'>
+        <button>Home</button>
+        </Link>
     </div>
   )
 }
