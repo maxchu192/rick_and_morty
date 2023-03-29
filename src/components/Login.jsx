@@ -26,11 +26,11 @@ export default function Login({login}) {
 
     function handleChange(e) {
         setInputs({
-            ... inputs,
+            ...inputs,
             [e.target.name]:e.target.value,
         })
         setErrors(validate({
-            ... inputs,
+            ...inputs,
             [e.target.name]:e.target.value,
         }))
 

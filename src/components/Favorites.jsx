@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterCards, orderCards, removeFav, reset } from '../redux/actions/action.js';
 import Card from './Card.jsx';
+import './Favorites.css';
 
 export default function Favorites({onClose}) {
     const {myFavorites} = useSelector((state) => state);
@@ -31,8 +32,8 @@ export default function Favorites({onClose}) {
         <h2>Favorites</h2>
         <select onChange={handleOrder} name='order' defaultValue={'DEFAULT'}>
             <option value='DEFAULT' disabled>Select Order</option>
-            <option value='Ascendente' disabled>Ascendente</option>
-            <option value='Descendente' disabled>Descendente</option>
+            <option value='Ascendente'>Ascendente</option>
+            <option value='Descendente'>Descendente</option>
         </select>
         <select onChange={handleFilter} name='filter' defaultValue={'DEFAULT'}>
             <option value='DEFAULT' disabled>Select Filter</option>
@@ -42,6 +43,7 @@ export default function Favorites({onClose}) {
             <option value='unknown'>unknown</option>
         </select>
         <button onClick={resetBtn}>Reset</button>
+        <div className='fav_container'>
         {
             myFavorites && myFavorites.map((element, index) => {
                return (
@@ -57,7 +59,8 @@ export default function Favorites({onClose}) {
                onClose={() => closeFavorite(element.id)}   
                />)
             })
-         }
+        }
+        </div>
     </div>
   )
 }

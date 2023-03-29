@@ -29,9 +29,13 @@ export default function rootReducer (state = initialState, { type, payload }) {
             };
         case ORDER:
             const newOrder = state.myFavoritesOrigin.sort((a, b) => {
-                if (a.id > b.id) 'Ascendente' === payload ? 1 : -1;
-                if (a.id < b.id) 'Descendente' === payload ? 1 : -1;
-                return 0
+                if (a.id > b.id) {
+                    return 'Ascendente' === payload ? 1 : -1;
+                }
+                if (a.id < b.id) {
+                    return 'Descendente' === payload ? 1 : -1;
+                }
+                return 0;
             });
             return {
                 ...state,
