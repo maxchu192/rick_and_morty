@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar.jsx';
 import { Link } from 'react-router-dom';
-import './nav.css';
+import './Nav.css';
 
 
 export default function Nav({onSearch, logout}) {
