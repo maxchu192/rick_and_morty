@@ -1,4 +1,4 @@
-import './App.css';
+import styles from './styles/App.module.css';
 import axios from 'axios';
 import Cards from './components/Cards.jsx';
 import Nav from './components/Nav.jsx';
@@ -7,7 +7,7 @@ import Detail from './components/Detail.jsx';
 import Login from './components/Login.jsx';
 import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import Favorites from './components/Favorites';
+import Favorites from './components/Favorites.jsx';
 
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
    const location = useLocation()
    const navigate = useNavigate();
    const [access, setAccess] = useState(false);
-   const EMAIL = 'ejemplo@gmail.com';
-   const PASSWORD = 'unaPassword';
+   const EMAIL = 'eje@mail.com';
+   const PASSWORD = '@Model101';
 
    function login(inputs) {
       if (inputs.password === PASSWORD && inputs.email === EMAIL) {
@@ -55,7 +55,7 @@ function App() {
    })
    }
    return (
-      <div className='App'>
+      <div className={styles.app}>
          {
             location.pathname === "/" ? null : (<Nav logout={logout} onSearch={onSearch} />)
          }

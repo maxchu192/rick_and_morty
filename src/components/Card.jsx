@@ -1,4 +1,4 @@
-import "./card.css";
+import style from "../styles/Card.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,13 +35,11 @@ export default function Card(props) {
    }
 
    return (
-      <div className="card">
-         {isFav ? (
-            <button onClick={handleFavorite}>❤️</button>
-         ) : (
-            <button onClick={handleFavorite}>🤍</button>
-         )}
-         <button onClick={superClouse}>X</button>
+      <div className={style.card}>
+         <div className="buttons">
+            {isFav ? (<button onClick={handleFavorite}>❤️</button>) : (<button onClick={handleFavorite}>🤍</button>)}
+            <button onClick={superClouse}>X</button>
+         </div>
          <Link to={`/detail/${id}`} >
          <h2>{name}</h2>
          </Link>         
