@@ -2,5 +2,5 @@
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
-    border: 5px solid rgba(235, 201, 223, 0.301);
+    justify-content: space-around;
 }

@@ -1,4 +1,17 @@
 .app {
+    display: flex;
     box-sizing: border-box;
     background-color: darkolivegreen;
+    background-image: url('../fondorym.jpg');
+    background-repeat: no-repeat;
+    background-size: 90% 100%;
+    background-position: center;
+    height: 100vh;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+* {
+    box-sizing: border-box;
 }

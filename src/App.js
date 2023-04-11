@@ -8,6 +8,7 @@ import Login from './components/Login.jsx';
 import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Favorites from './components/Favorites.jsx';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -66,7 +67,7 @@ function App() {
             <Route path='/favorites' element={<Favorites onClose={onClose} />} />
             <Route path='/detail/:id' element={<Detail />} />
          </Routes>
-         
+         <Footer />
       </div>
    );
 }

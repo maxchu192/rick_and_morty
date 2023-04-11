@@ -6,7 +6,7 @@ import { addFav, removeFav } from '../redux/actions/action.js';
 
 
 export default function Card(props) {
-   const {id, name, status, species, gender, origin, image, onClose} = props;
+   const {id, name, image, onClose} = props;
    const dispatch = useDispatch();
    const [isFav, setIsFav] = useState(false);
    const {myFavorites} = useSelector((s) => s);
@@ -43,10 +43,6 @@ export default function Card(props) {
          <Link to={`/detail/${id}`} >
          <h2>{name}</h2>
          </Link>         
-         <h2>{status}</h2>
-         <h2>{species}</h2>
-         <h2>{gender}</h2>
-         <h2>{origin}</h2>
          <img src={image} alt={name} />
       </div>
    );
