@@ -51,10 +51,6 @@ export default function Favorites({onClose}) {
                key={index}
                id={element.id}
                name={element.name}
-               status={element.status}
-               species={element.species}
-               gender={element.gender}
-               origin={element.origin.name}
                image={element.image}
                onClose={() => closeFavorite(element.id)}   
                />)

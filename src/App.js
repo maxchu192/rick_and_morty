@@ -9,15 +9,26 @@ import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Favorites from './components/Favorites.jsx';
 import Footer from './components/Footer';
+import { useDispatch, useSelector } from "react-redux";
+import { addCharacters, searchCharacter } from "./redux/actions/action.js";
 
 
 function App() {
-   const [characters, setCharacters] = useState([])
-   const location = useLocation()
+   const { characters } = useSelector((state) => state);
+   const location = useLocation();
    const navigate = useNavigate();
+   const dispatch = useDispatch();
    const [access, setAccess] = useState(false);
    const EMAIL = 'eje@mail.com';
    const PASSWORD = '@Model101';
+
+   useEffect(() => {
+      axios
+      .get(`https://rickandmortyapi.com/api/character`)
+      .then((results) => {
+         dispatch(addCharacters(results.data.results));
+      });
+   }, []);
 
    function login(inputs) {
       if (inputs.password === PASSWORD && inputs.email === EMAIL) {
@@ -33,27 +44,17 @@ function App() {
 
    useEffect(() => {
       !access && navigate('/');
-   }, [access]);
+   }, [navigate, access]);
 
    function onSearch(id) {
       axios(`https://rickandmortyapi.com/api/character/${id}`)
       .then(({ data }) => {
-         if (data.name) {
-            let exist = characters.find((ch) => ch.id === data.id);
-               if(exist){
-                  alert("ya existe");
-               } else {
-                  setCharacters((oldChars) => [...oldChars, data]);
-               }
-         } else {
-            window.alert('¡No hay personajes con este ID!');
-         }
+         dispatch(searchCharacter(data));
       });
    }
    function onClose(id) {
-      setCharacters((oldChars) => {
-      return oldChars.filter((ch) => ch.id !== id)      
-   })
+      const filterCharacters = characters.filter((ch) => ch.id !== id);
+      dispatch(addCharacters(filterCharacters));
    }
    return (
       <div className={styles.app}>
