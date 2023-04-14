@@ -1,4 +1,5 @@
 import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, RESET, ADD_CHARACTERS, REMOVE_CHARACTER, NEXT_PAGE, PREV_PAGE, SEARCH_CHARACTER, HANDLE_NUMBER, RESET_CHARACTER } from './types';
+import axios from 'axios';
 
 export function prevPage() {
   return {
@@ -47,17 +48,32 @@ export function resetCharacters() {
 }
 
 export function addFav (character) {
-    return {
-        type: ADD_FAV,
-        payload: character,
-    };
+    return async function(dispatch){
+      try {
+        const {data}=await axios.post('http://localhost:3001/rickandmorty/favorites', character)
+        console.log(data)
+        return dispatch({
+          type: ADD_FAV,
+          payload: data,
+        })
+      } catch (error) {
+        console.log('addfav not found', error)
+      }      
+    }
 }
 
 export function removeFav (id) {
-    return {
+  return async function(dispatch){
+    try {
+      const {data}=await axios.delete(`http://localhost:3001/rickandmorty/favorites/${id}`)
+      return dispatch({
         type: REMOVE_FAV,
-        payload: id,
-    };
+        payload: data,
+      })
+    } catch (error) {
+      console.log('removefav not found', error)
+    }      
+  }
 }
 
 export function filterCards (gender) {

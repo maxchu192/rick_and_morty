@@ -31,7 +31,7 @@ export default function Favorites({onClose}) {
     <div>
         <h2>Favorites</h2>
         <select onChange={handleOrder} name='order' defaultValue={'DEFAULT'}>
-            <option value='DEFAULT' disabled>Select Order</option>
+            <option value='DEFAULT' disabled='true'>Select Order</option>
             <option value='Ascendente'>Ascendente</option>
             <option value='Descendente'>Descendente</option>
         </select>

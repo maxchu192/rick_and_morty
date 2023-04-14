@@ -57,15 +57,14 @@ export default function rootReducer (state = initialState, { type, payload }) {
         case ADD_FAV:
             return {
                 ...state,
-                myFavorites: [ ...state.myFavoritesOrigin, payload],
-                myFavoritesOrigin: [ ...state.myFavoritesOrigin, payload],
+                myFavorites: payload,
+                myFavoritesOrigin: payload,
             };
         case REMOVE_FAV:
-            const newFav = state.myFavoritesOrigin.filter((ch) => ch.id !== payload);
             return {
                 ...state,
-                myFavorites: newFav,
-                myFavoritesOrigin: newFav,
+                myFavorites: payload,
+                myFavoritesOrigin: payload,
             };
         case FILTER:
             const newFilter = state.myFavoritesOrigin.filter((ch) => ch.gender === payload);

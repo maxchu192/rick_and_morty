@@ -19,27 +19,38 @@ function App() {
    const navigate = useNavigate();
    const dispatch = useDispatch();
    const [access, setAccess] = useState(false);
-   const EMAIL = 'eje@mail.com';
-   const PASSWORD = '@Model101';
 
    useEffect(() => {
       axios
-      .get(`https://rickandmortyapi.com/api/character`)
+      .get(`http://localhost:3001/rickandmorty/character/all`)
       .then((results) => {
-         dispatch(addCharacters(results.data.results));
+         dispatch(addCharacters(results.data));
       });
    }, []);
 
    function login(inputs) {
-      if (inputs.password === PASSWORD && inputs.email === EMAIL) {
-         setAccess(true);
-         navigate('/home');
-      }
+      axios
+      .get(`http://localhost:3001/rickandmorty/login?password=${inputs.password}&email=${inputs.email}`)
+      .then(({ data }) => {
+         if (data.access) {
+            setAccess(data.access);
+            navigate("/home");
+            return alert("Welcome to our App");
+         } else {
+            return alert("invalid user");
+         }
+      });
    };
 
    function logout() {
-      setAccess(false);
-      navigate('/');
+      axios
+      .get('http://localhost:3001/rickandmorty/login?password=1234&email=1234')
+      .then(({data})=>{
+         if(!data.access) {
+            setAccess(data.access);
+            navigate('/');
+         }
+      });
    }
 
    useEffect(() => {
@@ -47,7 +58,7 @@ function App() {
    }, [navigate, access]);
 
    function onSearch(id) {
-      axios(`https://rickandmortyapi.com/api/character/${id}`)
+      axios(`https://localhost:3001/rickandmorty/character/${id}`)
       .then(({ data }) => {
          dispatch(searchCharacter(data));
       });
