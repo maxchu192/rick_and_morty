@@ -1,7 +1,8 @@
 .card {
     display: flex;
     border: 2px solid rgba(31, 27, 30, 0.966);
-    width: 20%;
+    width: 20vh;
+    height: 30vh;
     font-size: 8px;
     padding: 10px;
     margin: 5px;
@@ -11,7 +12,13 @@
     align-items: center;
     font-size: 10px;
 }
-.card img {
+
+.zoom {
     width: 100%;
     border-radius: 10px;
+    transition: transform .2s; 
+}
+ 
+.zoom:hover {
+    transform: scale(3); 
 }

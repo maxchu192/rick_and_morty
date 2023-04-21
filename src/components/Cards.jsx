@@ -1,9 +1,10 @@
 import Card from './Card';
-import style from '../styles/Cards.module.css';
+import styles from '../styles/Cards.module.css';
 import { useSelector } from "react-redux";
 import Paginate from "./Paginate";
+import example from '../example.jpg'
 
-export default function Cards({ onClose}) {
+export default function Cards({onClose}) {
    const { characters } = useSelector((state) => state);
    const { numPage } = useSelector((state) => state);
    let desde = (numPage - 1) * 4;
@@ -12,10 +13,12 @@ export default function Cards({ onClose}) {
    let viewCharacters = characters?.slice(desde, hasta);
 
    return (
-      <div>
-         <div className={style.cards_container}>
+      <div className={styles.card}>
+         <h2>Mazo de Cartas</h2>
+         <div className={styles.cards_container}>
             {
-               viewCharacters && viewCharacters.map((element, index) => {
+               characters.length === 0 ? <Card name='Elige una Carta' image={example} />
+               : viewCharacters && viewCharacters.map((element, index) => {
                   return (
                      <Card
                      key={index}

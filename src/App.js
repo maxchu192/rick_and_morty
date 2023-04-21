@@ -18,21 +18,20 @@ function App() {
    const location = useLocation();
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const [access, setAccess] = useState(false);
+   const [access, setAccess] = useState(true);
+   const [id, setId] = useState(Number);
 
    useEffect(() => {
       axios
       .get(`http://localhost:3001/rickandmorty/character/all`)
-      .then((results) => {
-         dispatch(addCharacters(results.data));
-      });
    }, []);
 
-   function login(inputs) {
+   function login({email, password}) {
       axios
-      .get(`http://localhost:3001/rickandmorty/login?password=${inputs.password}&email=${inputs.email}`)
+      .get(`http://localhost:3001/rickandmorty/login?email=${email}&password=${password}`)
       .then(({ data }) => {
          if (data.access) {
+            setId(data.user.id)
             setAccess(data.access);
             navigate("/home");
             return alert("Welcome to our App");
@@ -58,7 +57,7 @@ function App() {
    }, [navigate, access]);
 
    function onSearch(id) {
-      axios(`https://localhost:3001/rickandmorty/character/${id}`)
+      axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
       .then(({ data }) => {
          dispatch(searchCharacter(data));
       });
@@ -74,7 +73,7 @@ function App() {
          }
          <Routes>
             <Route path='/' element={<Login login={login}/>} />
-            <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
+            <Route path='/home' element={<Cards onClose={onClose} />} />
             <Route path='/about' element={<About />} />
             <Route path='/favorites' element={<Favorites onClose={onClose} />} />
             <Route path='/detail/:id' element={<Detail />} />

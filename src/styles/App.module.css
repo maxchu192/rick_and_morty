@@ -7,11 +7,34 @@
     background-size: 90% 100%;
     background-position: center;
     height: 100vh;
-    flex-wrap: wrap;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
 }
 
 * {
     box-sizing: border-box;
+}
+
+@media only screen and (max-width: 400px) {
+
+    .app {
+        display: flex;
+        box-sizing: border-box;
+        background-color: darkolivegreen;
+        background-image: url('../fondorym.jpg');
+        background-repeat: no-repeat;
+        background-size: 90% 100%;
+        background-position: center;
+        height: 100vh;
+        width: 51vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
 }

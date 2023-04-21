@@ -1,10 +1,8 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, RESET, ADD_CHARACTERS, REMOVE_CHARACTER, NEXT_PAGE, PREV_PAGE, HANDLE_NUMBER, RESET_CHARACTER, SEARCH_CHARACTER } from './actions/types.js';
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, RESET, ADD_CHARACTERS, REMOVE_CHARACTER, NEXT_PAGE, PREV_PAGE, SEARCH_CHARACTER } from './actions/types.js';
 
 const initialState = {
     numPage: 1,
-    charactersOrigin: [],
     characters: [],
-    data: [],
     myFavorites: [],
     myFavoritesOrigin: []
 }
@@ -14,12 +12,7 @@ export default function rootReducer (state = initialState, { type, payload }) {
         case SEARCH_CHARACTER:
             return {
                 ...state,
-                characters: [payload],
-            };
-        case HANDLE_NUMBER:
-            return {
-                ...state,
-                numPage: payload,
+                characters: [...state.characters, payload],
             };
         case NEXT_PAGE:
             return {
@@ -35,16 +28,15 @@ export default function rootReducer (state = initialState, { type, payload }) {
             if (Array.isArray(payload)) {
                 return {
                     ...state,
-                    charactersOrigin: [...payload],
                     characters: [...payload],
                 };
             }
             break;
-        case RESET_CHARACTER:
-            return {
-                ...state,
-                characters: [...state.charactersOrigin],
-            };
+        // case ADD_FAVORITES:
+        //     return {
+        //         ...state,
+        //         myFavorites: [],
+        //     };
         case REMOVE_CHARACTER:
             const newCharacter = state.myFavoritesOrigin.filter(
                 (ch) => ch.id !== payload
@@ -55,16 +47,18 @@ export default function rootReducer (state = initialState, { type, payload }) {
                 myFavoritesOrigin: newCharacter,
             };
         case ADD_FAV:
+            const newFav = state.characters.filter(c=>c.id === payload)
             return {
                 ...state,
-                myFavorites: payload,
-                myFavoritesOrigin: payload,
+                myFavorites: [...state.myFavorites, ...newFav],
+                myFavoritesOrigin: [...state.myFavoritesOrigin, ...newFav],
             };
         case REMOVE_FAV:
+            const newFav1 = state.myFavorites.filter(c=>c.id !== payload) 
             return {
                 ...state,
-                myFavorites: payload,
-                myFavoritesOrigin: payload,
+                myFavorites: [...state.myFavorites, ...newFav1],
+                myFavoritesOrigin: [...state.myFavoritesOrigin, ...newFav1],
             };
         case FILTER:
             const newFilter = state.myFavoritesOrigin.filter((ch) => ch.gender === payload);
