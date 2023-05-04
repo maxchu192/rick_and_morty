@@ -8,17 +8,17 @@ import store from './redux/store.js';
 import { Provider } from 'react-redux';
 
 /*
-<React.StrictMode>
-</React.StrictMode>
+
+
 */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
   <BrowserRouter>
-  
+  <React.StrictMode>
     <App />
-  
+  </React.StrictMode>
   </BrowserRouter>
   </Provider>
 );

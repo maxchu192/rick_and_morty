@@ -10,3 +10,5 @@ export const PREV_PAGE = "PREV_PAGE";
 export const SEARCH_CHARACTER = "SEARCH_CHARACTER";
 export const HANDLE_NUMBER = "HANDLE_NUMBER";
 export const RESET_CHARACTER = "RESET_CHARACTER";
+export const ADD_FAVORITES = "ADD_FAVORITES";
+export const ID = "ID";

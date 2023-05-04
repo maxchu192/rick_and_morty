@@ -1,16 +1,30 @@
 import Card from './Card';
 import styles from '../styles/Cards.module.css';
+import axios from 'axios'
 import { useSelector } from "react-redux";
 import Paginate from "./Paginate";
 import example from '../example.jpg'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addFavorites } from '../redux/actions/action';
 
-export default function Cards({onClose}) {
-   const { characters } = useSelector((state) => state);
-   const { numPage } = useSelector((state) => state);
-   let desde = (numPage - 1) * 4;
-   let hasta = numPage * 4;
-   let cantPages = Math.floor(characters.length / 4);
-   let viewCharacters = characters?.slice(desde, hasta);
+export default function Cards({ onClose }) {
+   const { characters, idU, numPage } = useSelector((state) => state);
+   const dispatch = useDispatch()
+
+   // useEffect(() => {
+   //    axios
+   //    .get(`http://localhost:3001/rickandmorty/favorites/${idU}`)
+   //    .then(({data})=>{
+   //       dispatch(addFavorites(data))
+   //    }) 
+   // }, [])
+   
+
+   var desde = (numPage - 1) * 4;
+   var hasta = numPage * 4;
+   var cantPages = Math.ceil(characters.length / 4);
+   var viewCharacters = characters.length < 4 ? characters : characters?.slice(desde, hasta);
 
    return (
       <div className={styles.card}>
@@ -18,18 +32,18 @@ export default function Cards({onClose}) {
          <div className={styles.cards_container}>
             {
                characters.length === 0 ? <Card name='Elige una Carta' image={example} />
-               : viewCharacters && viewCharacters.map((element, index) => {
-                  return (
-                     <Card
-                     key={index}
-                     id={element.id}
-                     name={element.name}
-                     image={element.image}
-                     onClose={onClose}
-                     />)
+                  : viewCharacters && viewCharacters.map((element, index) => {
+                     return (
+                        <Card
+                           key={index}
+                           id={element.id}
+                           name={element.name}
+                           image={element.image}
+                           onClose={onClose}
+                        />)
                   })
             }
          </div>
-         <Paginate cantPages={cantPages}/>
+         <Paginate cantPages={cantPages} />
       </div>);
 }

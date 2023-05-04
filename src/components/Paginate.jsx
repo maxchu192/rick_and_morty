@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "../styles/Paginate.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { nextPage, prevPage } from "../redux/actions/action.js";
@@ -6,6 +6,10 @@ import { nextPage, prevPage } from "../redux/actions/action.js";
 export default function Paginate({ cantPages }) {
   const { numPage } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+  }, [cantPages])
+  
 
   function next() {
     dispatch(nextPage());

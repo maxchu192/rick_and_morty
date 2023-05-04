@@ -1,5 +1,12 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, RESET, ADD_CHARACTERS, REMOVE_CHARACTER, NEXT_PAGE, PREV_PAGE, SEARCH_CHARACTER, HANDLE_NUMBER, RESET_CHARACTER } from './types';
-//import axios from 'axios';
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, RESET, ADD_CHARACTERS, REMOVE_CHARACTER, NEXT_PAGE, PREV_PAGE, SEARCH_CHARACTER, HANDLE_NUMBER, RESET_CHARACTER, ADD_FAVORITES, ID } from './types';
+import axios from 'axios';
+
+export function id(id) {
+  return {
+    type: ID,
+    payload: id,
+  }
+}
 
 export function prevPage() {
   return {
@@ -41,69 +48,64 @@ export function removeCharacter(id) {
   };
 }
 
-export function resetCharacters() { 
+export function resetCharacters() {
   return {
     type: RESET_CHARACTER,
   };
 }
 
-export function addFav (id) {
+export function addFavorites(obj) {
+  let aux = obj.maps(ch => {
+    let char = {
+      id: ch.id,
+      status: ch.status,
+      name: ch.name,
+      species: ch.species,
+      origin: ch.origin,
+      image: ch.image,
+      gender: ch.gender
+    }
+    return char
+  })
+
+  return {
+    type: ADD_FAVORITES,
+    payload: aux,
+  };
+}
+
+export function addFav(id, idU) {
+  axios.post(`http://localhost:3001/rickandmorty/favorites/${id}`, {id: idU})
   return {
     type: ADD_FAV,
     payload: id,
   };
 }
-// (character) {
-//     return async function(dispatch){
-//       try {
-//         const {data}=await axios.post('http://localhost:3001/rickandmorty/favorites', character)
-//         console.log(data)
-//         return dispatch({
-//           type: ADD_FAV,
-//           payload: data,
-//         })
-//       } catch (error) {
-//         console.log('addfav not found', error)
-//       }      
-//     }
-// }
 
-export function removeFav (id) {
+export function removeFav(obj) {
+  axios.delete(`http://localhost:3001/rickandmorty/favorites/`, {data: obj})
   return {
-    type: ADD_FAV,
-    payload: id,
+    type: REMOVE_FAV,
+    payload: obj.idC,
   };
 }
-// (id) {
-//   return async function(dispatch){
-//     try {
-//       const {data}=await axios.delete(`http://localhost:3001/rickandmorty/favorites/${id}`)
-//       return dispatch({
-//         type: REMOVE_FAV,
-//         payload: data,
-//       })
-//     } catch (error) {
-//       console.log('removefav not found', error)
-//     }      
-//   }
-// }
 
-export function filterCards (gender) {
-    return {
-        type: FILTER,
-        payload: gender,
-    };
+export function filterCards(gender) {
+  return {
+    type: FILTER,
+    payload: gender,
+  };
 }
 
-export function orderCards (order) {
-    return {
-        type: ORDER,
-        payload: order,
-    };
+export function orderCards(order) {
+  return {
+    type: ORDER,
+    payload: order,
+  };
 }
 
-export function reset () {
-    return {
-        type: RESET,
-    };
+export function reset() {
+  return {
+    type: RESET,
+  };
 }
