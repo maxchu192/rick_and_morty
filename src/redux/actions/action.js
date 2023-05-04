@@ -55,7 +55,7 @@ export function resetCharacters() {
 }
 
 export function addFavorites(obj) {
-  let aux = obj.maps(ch => {
+  let aux = obj?.map(ch => {
     let char = {
       id: ch.id,
       status: ch.status,

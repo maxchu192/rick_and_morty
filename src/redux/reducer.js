@@ -51,8 +51,7 @@ export default function rootReducer (state = initialState, { type, payload }) {
             return{
                 ...state,
                 myFavorites: payload,
-                myFavoritesOrigin: payload,
-                characters: payload
+                myFavoritesOrigin: payload
             }
         case ADD_FAV:
             const newFav = state.characters.filter(c=>c.id === payload)

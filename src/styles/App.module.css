@@ -2,7 +2,7 @@
     display: flex;
     box-sizing: border-box;
     background-color: darkolivegreen;
-    background-image: url('../fondorym.jpg');
+    background-image: url('../images/fondorym.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
@@ -22,7 +22,7 @@
         display: flex;
         box-sizing: border-box;
         background-color: darkolivegreen;
-        background-image: url('../fondorym.jpg');
+        background-image: url('../images/fondorym.jpg');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         background-position: center;

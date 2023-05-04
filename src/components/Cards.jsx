@@ -3,7 +3,7 @@ import styles from '../styles/Cards.module.css';
 import axios from 'axios'
 import { useSelector } from "react-redux";
 import Paginate from "./Paginate";
-import example from '../example.jpg'
+import example from '../images/example.jpg'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addFavorites } from '../redux/actions/action';
@@ -12,13 +12,13 @@ export default function Cards({ onClose }) {
    const { characters, idU, numPage } = useSelector((state) => state);
    const dispatch = useDispatch()
 
-   // useEffect(() => {
-   //    axios
-   //    .get(`http://localhost:3001/rickandmorty/favorites/${idU}`)
-   //    .then(({data})=>{
-   //       dispatch(addFavorites(data))
-   //    }) 
-   // }, [])
+   useEffect(() => {
+      axios
+      .get(`http://localhost:3001/rickandmorty/favorites/${idU}`)
+      .then(({data})=>{
+         dispatch(addFavorites(data))
+      }) 
+   }, [])
    
 
    var desde = (numPage - 1) * 4;

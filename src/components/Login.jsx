@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logoRyM.jpg';
+import logo from '../images/logoRyM.jpg';
 import styles from '../styles/Login.module.css';
 
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -62,10 +62,10 @@ export default function Login({login}) {
         <img src={logo} alt='logo' />
         <form className={styles.form_login} onSubmit={handleSubmit}>
             <label>E-mail:</label>
-            <input name='email' value={inputs.email} onChange={handleChange}></input>
+            <input name='email' value={inputs.email} onChange={handleChange} placeholder='eje@mail.com'></input>
             <p className={styles.danger}>{errors.email}</p>
             <label>Password:</label>
-            <input name='password' value={inputs.password} onChange={handleChange}></input>
+            <input name='password' value={inputs.password} onChange={handleChange} placeholder='@Model101'></input>
             <p className={styles.danger}>{errors.password}</p>
             {
                 Object.keys(errors).length === 0 ? (<button type= 'submit'>Ingresar</button>) : null

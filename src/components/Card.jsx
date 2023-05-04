@@ -2,7 +2,6 @@ import style from "../styles/Card.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from 'axios';
 import { addFav, removeFav } from '../redux/actions/action.js';
 
 

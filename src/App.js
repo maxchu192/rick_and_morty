@@ -10,7 +10,7 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Favorites from './components/Favorites.jsx';
 import Footer from './components/Footer';
 import { useDispatch, useSelector } from "react-redux";
-import { addCharacters, searchCharacter, id , addFavorites} from "./redux/actions/action.js";
+import { addCharacters, searchCharacter, id } from "./redux/actions/action.js";
 
 
 function App() {
@@ -20,35 +20,24 @@ function App() {
    const dispatch = useDispatch();
    const [access, setAccess] = useState(false);
 
-   useEffect(() => {
-       axios
-       .get(`http://localhost:3001/rickandmorty/character/all`)
-   },[]);
-
    function login(user) {
       axios
-      .put(`http://localhost:3001/rickandmorty/login`, user)
-      .then(({ data }) => {
-         if (data.access) {
-            setAccess(data.access);
-            dispatch(id(data.id))
-            navigate("/home");
-            return alert("Welcome to our App");
-         } else {
-            return alert("invalid user");
-         }
-      });
+         .put(`http://localhost:3001/rickandmorty/login`, user)
+         .then(({ data }) => {
+            if (data.access) {
+               setAccess(data.access);
+               dispatch(id(data.id))
+               navigate("/home");
+               return alert("Welcome to our App");
+            } else {
+               return alert("invalid user");
+            }
+         });
    };
 
    function logout() {
-      axios
-      .get('http://localhost:3001/rickandmorty/login?password=1234&email=1234')
-      .then(({data})=>{
-         if(!data.access) {
-            setAccess(data.access);
-            navigate('/');
-         }
-      });
+      setAccess(false);
+      navigate('/');
    }
 
    useEffect(() => {
@@ -57,9 +46,9 @@ function App() {
 
    function onSearch(idC) {
       axios.get(`http://localhost:3001/rickandmorty/character/${idC}`)
-      .then(({ data }) => {
-         dispatch(searchCharacter(data));
-      });
+         .then(({ data }) => {
+            dispatch(searchCharacter(data));
+         });
    }
    function onClose(idC) {
       const filterCharacters = characters.filter((ch) => ch.id !== idC);
@@ -71,8 +60,8 @@ function App() {
             location.pathname === "/" ? null : (<Nav logout={logout} onSearch={onSearch} />)
          }
          <Routes>
-            <Route path='/' element={<Login login={login}/>} />
-            <Route path='/home' element={<Cards  onClose={onClose} />} />
+            <Route path='/' element={<Login login={login} />} />
+            <Route path='/home' element={<Cards onClose={onClose} />} />
             <Route path='/about' element={<About />} />
             <Route path='/favorites' element={<Favorites onClose={onClose} />} />
             <Route path='/detail/:id' element={<Detail />} />
