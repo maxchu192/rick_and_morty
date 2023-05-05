@@ -75,7 +75,7 @@ export function addFavorites(obj) {
 }
 
 export function addFav(id, idU) {
-  axios.post(`http://localhost:3001/rickandmorty/favorites/${id}`, {id: idU})
+  axios.post(`https://rym.up.railway.app/rickandmorty/favorites/${id}`, {id: idU})
   return {
     type: ADD_FAV,
     payload: id,
@@ -83,7 +83,7 @@ export function addFav(id, idU) {
 }
 
 export function removeFav(obj) {
-  axios.delete(`http://localhost:3001/rickandmorty/favorites/`, {data: obj})
+  axios.delete(`https://rym.up.railway.app/rickandmorty/favorites/`, {data: obj})
   return {
     type: REMOVE_FAV,
     payload: obj.idC,

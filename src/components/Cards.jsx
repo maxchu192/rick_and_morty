@@ -14,7 +14,7 @@ export default function Cards({ onClose }) {
 
    useEffect(() => {
       axios
-      .get(`http://localhost:3001/rickandmorty/favorites/${idU}`)
+      .get(`https://rym.up.railway.app/rickandmorty/favorites/${idU}`)
       .then(({data})=>{
          dispatch(addFavorites(data))
       }) 

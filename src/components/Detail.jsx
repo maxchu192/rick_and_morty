@@ -9,7 +9,7 @@ export default function Detail() {
    const [character, setCharacter] = useState({});
 
    useEffect(() => {
-      axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
+      axios.get(`https://rym.up.railway.app/rickandmorty/character/${id}`)
          .then(({ data }) => {
             console.log(data)
             if (data.name) {

@@ -22,7 +22,7 @@ function App() {
 
    function login(user) {
       axios
-         .put(`http://localhost:3001/rickandmorty/login`, user)
+         .put(`https://rym.up.railway.app/rickandmorty/login`, user)
          .then(({ data }) => {
             if (data.access) {
                setAccess(data.access);
@@ -45,7 +45,7 @@ function App() {
    }, [navigate, access]);
 
    function onSearch(idC) {
-      axios.get(`http://localhost:3001/rickandmorty/character/${idC}`)
+      axios.get(`https://rym.up.railway.app/rickandmorty/character/${idC}`)
          .then(({ data }) => {
             dispatch(searchCharacter(data));
          });
